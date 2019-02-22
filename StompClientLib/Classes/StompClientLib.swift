@@ -65,6 +65,7 @@ public protocol StompClientLibDelegate {
     func serverDidSendReceipt(client: StompClientLib!, withReceiptId receiptId: String)
     func serverDidSendError(client: StompClientLib!, withErrorMessage description: String, detailedErrorMessage message: String?)
     func serverDidSendPing()
+       func stompClientConnect(client: StompClientLib!)
 }
 
 public class StompClientLib: NSObject, SRWebSocketDelegate {
@@ -189,6 +190,7 @@ public class StompClientLib: NSObject, SRWebSocketDelegate {
     
     public func webSocketDidOpen(_ webSocket: SRWebSocket!) {
         print("WebSocket is connected")
+        delegate?.stompClientConnect(client: self)
         connect()
     }
     
